@@ -22,7 +22,7 @@ module.exports = {
       },
       device_token: {
         type: Sequelize.STRING,
-        index: true,
+        allowNull: false,
       },
       platform: {
         type: Sequelize.STRING,
@@ -45,6 +45,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    await queryInterface.addIndex("user_devices", ["user_id", "device_token"]);
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("user_devices");

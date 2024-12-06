@@ -16,6 +16,7 @@ import {
   HasManyHasAssociationsMixin,
   HasManyCountAssociationsMixin,
   BelongsToGetAssociationMixin,
+  BelongsToSetAssociationMixin,
 } from "sequelize";
 import { sequelize } from ".";
 import User from "./user";
@@ -37,6 +38,7 @@ class UserDevice extends Model<
   declare updatedAt: CreationOptional<Date>;
 
   declare getUser: BelongsToGetAssociationMixin<User>;
+  declare setUser: BelongsToSetAssociationMixin<User, number>;
 
   declare getRefreshTokens: HasManyGetAssociationsMixin<RefreshToken>; // Note the null assertions!
   declare addRefreshToken: HasManyAddAssociationMixin<RefreshToken, number>;
