@@ -1,0 +1,32 @@
+{
+  "development": {
+    "username": "brian.liu@pixelforce.com.au",
+    "password": null,
+    "database": "auth_service_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "define": {
+      "underscored": true
+    }
+  },
+  "test": {
+    "username": "brian.liu@pixelforce.com.au",
+    "password": null,
+    "database": "auth_service_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "define": {
+      "underscored": true
+    }
+  },
+  "production": {
+    "username": "brian.liu@pixelforce.com.au",
+    "password": null,
+    "database": "auth_service_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "define": {
+      "underscored": true
+    }
+  }
+}
