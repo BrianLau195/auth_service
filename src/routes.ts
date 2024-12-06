@@ -1,11 +1,12 @@
 import { Router } from "express";
-import authController from "./controllers/authController.js";
-import tokensController from "./controllers/tokensController.js";
+import authController from "./controllers/authController";
+import tokensController from "./controllers/tokensController";
 
 const router = Router();
 
-router.post("/signup", authController.signup);
-router.post("/login", authController.login);
-router.post("/refresh", tokensController.refresh);
+router.post("/auth/signup", authController.signup);
+router.post("/auth/login", authController.login);
+
+router.post("/tokens/refresh", tokensController.refresh);
 
 export default router;
