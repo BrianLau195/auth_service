@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("refresh_tokens", {
+    await queryInterface.createTable("user_devices", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,19 +17,24 @@ module.exports = {
           key: "id",
         },
       },
-      user_device_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "user_devices",
-          key: "id",
-        },
-      },
-      token_hash: {
+      device_name: {
         type: Sequelize.STRING,
       },
-      expires_at: {
-        type: Sequelize.DATE,
+      device_token: {
+        type: Sequelize.STRING,
+        index: true,
+      },
+      platform: {
+        type: Sequelize.STRING,
+      },
+      os_version: {
+        type: Sequelize.STRING,
+      },
+      app_version: {
+        type: Sequelize.STRING,
+      },
+      app_build: {
+        type: Sequelize.STRING,
       },
       created_at: {
         allowNull: false,
@@ -42,6 +47,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("refresh_tokens");
+    await queryInterface.dropTable("user_devices");
   },
 };

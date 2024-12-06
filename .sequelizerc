@@ -2,6 +2,5 @@ const path = require("path");
 
 module.exports = {
   config: path.resolve("config", "config.json"),
-  models: path.resolve("src", "models"),
-  migrations: path.resolve("migrations"),
+  "models-path": path.resolve("src", "models"),
 };

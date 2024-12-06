@@ -18,6 +18,7 @@ import {
 import { sequelize } from ".";
 import { hashPassword, verifyPassword, signToken } from "../utils";
 import RefreshToken from "./refreshToken";
+import UserDevice from "./userDevice";
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: CreationOptional<number>;
@@ -50,6 +51,17 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     "userId"
   >;
 
+  declare getUserDevices: HasManyGetAssociationsMixin<UserDevice>;
+  declare addUserDevice: HasManyAddAssociationMixin<UserDevice, number>;
+  declare addUserDevices: HasManyAddAssociationsMixin<UserDevice, number>;
+  declare setUserDevices: HasManySetAssociationsMixin<UserDevice, number>;
+  declare removeUserDevice: HasManyRemoveAssociationMixin<UserDevice, number>;
+  declare removeUserDevices: HasManyRemoveAssociationsMixin<UserDevice, number>;
+  declare hasUserDevice: HasManyHasAssociationMixin<UserDevice, number>;
+  declare hasUserDevices: HasManyHasAssociationsMixin<UserDevice, number>;
+  declare countUserDevices: HasManyCountAssociationsMixin;
+  declare createUserDevice: HasManyCreateAssociationMixin<UserDevice, "userId">;
+
   async verifyPassword(password: string): Promise<boolean> {
     return await verifyPassword(password, this.hashedPassword);
   }
@@ -75,7 +87,7 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
