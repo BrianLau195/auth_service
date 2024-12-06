@@ -7,8 +7,6 @@ export const userDeviceMiddleware = async (
   next: NextFunction,
 ) => {
   try {
-    console.log("userDeviceMiddleware");
-    console.log(req.headers["device-token"]);
     const deviceToken = req.headers["device-token"];
     const deviceName = req.headers["device-name"];
     const platform = req.headers["platform"];
