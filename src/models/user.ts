@@ -66,18 +66,21 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     return await verifyPassword(password, this.hashedPassword);
   }
 
-  async generateToken(
-    userDevice: UserDevice,
-    tokenType?: "access" | "refresh",
-  ) {
-    const token = signToken({ id: this.id });
-    if (tokenType === "refresh") {
-      await RefreshToken.create({
-        userId: this.id,
-        userDeviceId: userDevice.id,
-        token: token,
-      });
-    }
+  async generateToken() {
+    return await signToken({ id: this.id });
+  }
+
+  async generateAccessToken() {
+    return await this.generateToken();
+  }
+
+  async generateRefreshToken(userDevice: UserDevice) {
+    const token = await this.generateToken();
+    await RefreshToken.create({
+      userId: this.id,
+      userDeviceId: userDevice.id,
+      token: token,
+    });
     return token;
   }
 

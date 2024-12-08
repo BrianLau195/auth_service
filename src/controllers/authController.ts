@@ -12,8 +12,8 @@ const signup = async (req: Request, res: Response) => {
     const userDevice = req.userDevice;
     userDevice.userId = newUser.id;
     await userDevice.save();
-    const accessToken = await newUser.generateToken(userDevice, "access");
-    const refreshToken = await newUser.generateToken(userDevice, "refresh");
+    const accessToken = await newUser.generateAccessToken();
+    const refreshToken = await newUser.generateRefreshToken(userDevice);
     res.setHeader("Authorization", `Bearer ${accessToken}`);
     res.setHeader("Refresh", `${refreshToken}`);
     res.status(201).json({ message: "User created successfully" });
@@ -37,8 +37,8 @@ const login = async (req: Request, res: Response) => {
 
   if (isValid && user) {
     const userDevice = req.userDevice;
-    const accessToken = await user.generateToken(userDevice, "access");
-    const refreshToken = await user.generateToken(userDevice, "refresh");
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken(userDevice);
     res.setHeader("Authorization", `Bearer ${accessToken}`);
     res.setHeader("Refresh", `${refreshToken}`);
     await dummyPromise;

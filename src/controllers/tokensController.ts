@@ -13,8 +13,8 @@ const refresh = async (req: Request, res: Response) => {
 
     if (validToken) {
       const user = await userDevice.getUser();
-      const accessToken = await user.generateToken(userDevice, "access");
-      const newRefreshToken = await user.generateToken(userDevice, "refresh");
+      const accessToken = await user.generateAccessToken();
+      const newRefreshToken = await user.generateRefreshToken(userDevice);
       res.setHeader("Authorization", `Bearer ${accessToken}`);
       res.setHeader("Refresh", `${newRefreshToken}`);
       res.status(200).json({ message: "Token refreshed successfully" });
