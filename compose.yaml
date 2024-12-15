@@ -1,0 +1,9 @@
+services:
+  auth-service:
+    build: .
+    network_mode: "host"
+    command: npm run start
+    volumes:
+      - .:/app
+    ports:
+      - 4000:4000
