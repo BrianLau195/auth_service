@@ -7,6 +7,6 @@ const router = Router();
 router.post("/auth/signup", authController.signup);
 router.post("/auth/login", authController.login);
 
-router.post("/tokens/refresh", tokensController.refresh);
+router.get("/tokens/refresh", tokensController.refresh);
 
 export default router;

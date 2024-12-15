@@ -5,22 +5,9 @@ import {
   InferCreationAttributes,
   DataTypes,
   ForeignKey,
-  HasManyGetAssociationsMixin,
-  HasManyCreateAssociationMixin,
-  HasManyRemoveAssociationMixin,
-  HasManySetAssociationsMixin,
-  HasManyAddAssociationsMixin,
-  HasManyAddAssociationMixin,
-  HasManyRemoveAssociationsMixin,
-  HasManyHasAssociationMixin,
-  HasManyHasAssociationsMixin,
-  HasManyCountAssociationsMixin,
-  BelongsToGetAssociationMixin,
-  BelongsToSetAssociationMixin,
 } from "sequelize";
 import { sequelize } from ".";
 import User from "./user";
-import RefreshToken from "./refreshToken";
 
 class UserDevice extends Model<
   InferAttributes<UserDevice>,
@@ -36,29 +23,6 @@ class UserDevice extends Model<
   declare appBuild: CreationOptional<string>;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
-
-  declare getUser: BelongsToGetAssociationMixin<User>;
-  declare setUser: BelongsToSetAssociationMixin<User, number>;
-
-  declare getRefreshTokens: HasManyGetAssociationsMixin<RefreshToken>; // Note the null assertions!
-  declare addRefreshToken: HasManyAddAssociationMixin<RefreshToken, number>;
-  declare addRefreshTokens: HasManyAddAssociationsMixin<RefreshToken, number>;
-  declare setRefreshTokens: HasManySetAssociationsMixin<RefreshToken, number>;
-  declare removeRefreshToken: HasManyRemoveAssociationMixin<
-    RefreshToken,
-    number
-  >;
-  declare removeRefreshTokens: HasManyRemoveAssociationsMixin<
-    RefreshToken,
-    number
-  >;
-  declare hasRefreshToken: HasManyHasAssociationMixin<RefreshToken, number>;
-  declare hasRefreshTokens: HasManyHasAssociationsMixin<RefreshToken, number>;
-  declare countRefreshTokens: HasManyCountAssociationsMixin;
-  declare createRefreshToken: HasManyCreateAssociationMixin<
-    RefreshToken,
-    "userDeviceId"
-  >;
 }
 
 UserDevice.init(

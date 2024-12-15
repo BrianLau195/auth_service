@@ -4,16 +4,6 @@ import {
   InferAttributes,
   InferCreationAttributes,
   DataTypes,
-  HasManyHasAssociationsMixin,
-  HasManyHasAssociationMixin,
-  HasManyCountAssociationsMixin,
-  HasManyCreateAssociationMixin,
-  HasManyRemoveAssociationsMixin,
-  HasManyRemoveAssociationMixin,
-  HasManySetAssociationsMixin,
-  HasManyAddAssociationsMixin,
-  HasManyAddAssociationMixin,
-  HasManyGetAssociationsMixin,
 } from "sequelize";
 import { sequelize } from ".";
 import { hashPassword, verifyPassword, signToken } from "../utils";
@@ -30,37 +20,6 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare uuid: CreationOptional<string>;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
-
-  declare getRefreshTokens: HasManyGetAssociationsMixin<RefreshToken>; // Note the null assertions!
-  declare addRefreshToken: HasManyAddAssociationMixin<RefreshToken, number>;
-  declare addRefreshTokens: HasManyAddAssociationsMixin<RefreshToken, number>;
-  declare setRefreshTokens: HasManySetAssociationsMixin<RefreshToken, number>;
-  declare removeRefreshToken: HasManyRemoveAssociationMixin<
-    RefreshToken,
-    number
-  >;
-  declare removeRefreshTokens: HasManyRemoveAssociationsMixin<
-    RefreshToken,
-    number
-  >;
-  declare hasRefreshToken: HasManyHasAssociationMixin<RefreshToken, number>;
-  declare hasRefreshTokens: HasManyHasAssociationsMixin<RefreshToken, number>;
-  declare countRefreshTokens: HasManyCountAssociationsMixin;
-  declare createRefreshToken: HasManyCreateAssociationMixin<
-    RefreshToken,
-    "userId"
-  >;
-
-  declare getUserDevices: HasManyGetAssociationsMixin<UserDevice>;
-  declare addUserDevice: HasManyAddAssociationMixin<UserDevice, number>;
-  declare addUserDevices: HasManyAddAssociationsMixin<UserDevice, number>;
-  declare setUserDevices: HasManySetAssociationsMixin<UserDevice, number>;
-  declare removeUserDevice: HasManyRemoveAssociationMixin<UserDevice, number>;
-  declare removeUserDevices: HasManyRemoveAssociationsMixin<UserDevice, number>;
-  declare hasUserDevice: HasManyHasAssociationMixin<UserDevice, number>;
-  declare hasUserDevices: HasManyHasAssociationsMixin<UserDevice, number>;
-  declare countUserDevices: HasManyCountAssociationsMixin;
-  declare createUserDevice: HasManyCreateAssociationMixin<UserDevice, "userId">;
 
   async verifyPassword(password: string): Promise<boolean> {
     return await verifyPassword(password, this.hashedPassword);

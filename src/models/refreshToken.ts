@@ -26,8 +26,6 @@ class RefreshToken extends Model<
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 
-  declare getUser: BelongsToGetAssociationMixin<User>;
-
   hashToken(token: string) {
     if (this.changed("token")) {
       const decoded = verifyToken(token);
