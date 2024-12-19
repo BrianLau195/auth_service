@@ -18,7 +18,7 @@ const refresh = async (req: Request, res: Response) => {
     if (validToken) {
       const user = await User.findByPk(userDevice.userId);
       if (!user) {
-        res.status(404).json({ message: "User not found" });
+        res.status(404).json({ error: "User not found" });
         return;
       }
       const accessToken = await user.generateAccessToken();
@@ -36,10 +36,10 @@ const refresh = async (req: Request, res: Response) => {
           },
         });
       }
-      res.status(401).json({ message: "Invalid refresh token" });
+      res.status(401).json({ error: "Invalid refresh token" });
     }
   } else {
-    res.status(401).json({ message: "Invalid refresh token" });
+    res.status(401).json({ error: "Invalid refresh token" });
   }
 };
 

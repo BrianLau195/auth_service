@@ -69,7 +69,7 @@ describe("Tokens Controller", () => {
         .set("refresh", "invalid-token");
 
       expect(response.status).toBe(401);
-      expect(response.body).toEqual({ message: "Invalid refresh token" });
+      expect(response.body).toEqual({ error: "Invalid refresh token" });
     });
 
     it("should return error with missing refresh token", async () => {
@@ -78,7 +78,7 @@ describe("Tokens Controller", () => {
         .set("device-token", "test-device-token");
 
       expect(response.status).toBe(401);
-      expect(response.body).toEqual({ message: "Invalid refresh token" });
+      expect(response.body).toEqual({ error: "Invalid refresh token" });
     });
 
     it("should return error with mismatched device token", async () => {
@@ -88,7 +88,7 @@ describe("Tokens Controller", () => {
         .set("refresh", `${refreshToken}`);
 
       expect(response.status).toBe(401);
-      expect(response.body).toEqual({ message: "Invalid refresh token" });
+      expect(response.body).toEqual({ error: "Invalid refresh token" });
     });
   });
 });

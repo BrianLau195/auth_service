@@ -45,7 +45,7 @@ const login = async (req: Request, res: Response) => {
     res.status(200).json({ message: "User logged in successfully" });
   } else {
     await dummyPromise;
-    res.status(400).json({ message: "Invalid credentials" });
+    res.status(400).json({ error: "Invalid credentials" });
   }
 };
 

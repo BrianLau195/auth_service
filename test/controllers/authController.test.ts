@@ -94,7 +94,7 @@ describe("Auth Controller", () => {
         });
 
       expect(response.status).toBe(400);
-      expect(response.body).toEqual({ message: "Invalid credentials" });
+      expect(response.body).toEqual({ error: "Invalid credentials" });
     });
 
     it("should return error when user not found", async () => {
@@ -107,7 +107,7 @@ describe("Auth Controller", () => {
         });
 
       expect(response.status).toBe(400);
-      expect(response.body).toEqual({ message: "Invalid credentials" });
+      expect(response.body).toEqual({ error: "Invalid credentials" });
     });
   });
 });
