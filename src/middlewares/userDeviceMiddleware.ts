@@ -1,11 +1,7 @@
-import { Request, Response, NextFunction } from "express";
+import { RequestHandler } from "express";
 import UserDevice from "../models/userDevice";
 
-export const userDeviceMiddleware = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const userDeviceMiddleware: RequestHandler = async (req, res, next) => {
   try {
     const deviceToken = req.headers["device-token"];
     const deviceName = req.headers["device-name"];
@@ -15,7 +11,8 @@ export const userDeviceMiddleware = async (
     const appBuild = req.headers["app-build"];
 
     if (!deviceToken) {
-      return res.status(400).json({ error: "Device token is required" });
+      res.status(400).json({ error: "Device token is required" });
+      return;
     }
 
     // Find or create the UserDevice record
