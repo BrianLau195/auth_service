@@ -3,7 +3,8 @@ import User from "../models/user";
 
 const updateUserDetails = async (req: Request, res: Response) => {
   try {
-    const userId = req.user?.id;
+    const jwtContext = req.jwtContext;
+    const userId = jwtContext?.id;
     const { firstName, lastName } = req.body;
 
     if (!userId) {
@@ -41,7 +42,12 @@ const updateUserDetails = async (req: Request, res: Response) => {
 };
 
 const getUserDetails = async (req: Request, res: Response) => {
-  const userId = req.user?.id;
+  const jwtContext = req.jwtContext;
+  const userId = jwtContext?.id;
+  if (!userId) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
   const user = await User.findByPk(userId, {
     attributes: {
       exclude: ["hashedPassword", "uuid", "createdAt", "updatedAt"],

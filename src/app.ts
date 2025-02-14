@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import router from "./routes";
 import { userDeviceMiddleware } from "./middlewares/userDeviceMiddleware";
+import { jwtContext } from "jwt-context";
 
 dotenv.config();
 
@@ -13,7 +14,8 @@ app.use(express.json());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-app.use(userDeviceMiddleware as RequestHandler);
+app.use(jwtContext(process.env.JWT_SECRET || "secret"));
+app.use(userDeviceMiddleware);
 app.use("/", router);
 
 export default app;
