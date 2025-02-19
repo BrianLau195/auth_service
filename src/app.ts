@@ -14,7 +14,11 @@ app.use(express.json());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-app.use(jwtContext(process.env.JWT_SECRET || "secret"));
+app.use(
+  jwtContext({
+    secret: process.env.JWT_SECRET || "",
+  }),
+);
 app.use(userDeviceMiddleware);
 app.use("/", router);
 
